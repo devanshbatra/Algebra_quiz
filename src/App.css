@@ -1,38 +1,382 @@
-.App {
-  text-align: center;
+/* Global */
+body{
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
-
-.App-logo {
-  height: 40vmin;
+:root{
+  --greenButton: #518130;
+  --greenButtonActive: #416628;
+  --blue: rgb(0, 110, 212);
+  --darkBlue: rgb(12, 75, 134);
+  --yellow: rgb(213, 226, 33);
+}
+.greenColor{
+  color: rgb(40, 214, 40);
+}
+.redColor{
+  color: rgb(214, 40, 40);
+}
+.generalBtn{
+  height: 4.5rem;
+  background-color: var(--greenButton);
+  color: white;
+  font-size: 2.5rem;
+  font-weight: bold;
+  padding: 0.5rem 2rem;
+  position: absolute;
+  border: 3px solid black;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0px 4px 8px 5px #0000007a;
+  transition: background-color 0.3s ease;
+}
+.generalBtn:hover{
+  background-color: var(--greenButtonActive);
+}
+.generalBtn:active{
+  background-color: var(--greenButtonActive);
+  transform: scale(0.91);
+}
+#appear{
+  pointer-events: all;
+  opacity: 1;
+}
+.appear{
+  pointer-events: all;
+  opacity: 1;
+}
+.disappear{
   pointer-events: none;
+  opacity: 0;
+}
+/* Welcome screen */
+.welcome{
+  background: url('./Assets/img/gamePlayBack.png') center center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+}
+.welcome p{
+  font-size: 3rem;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+/* Start Screen */
+.startCont{
+  background: url('./Assets/img/background.png') center center/cover no-repeat ;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.boyDiv{
+  position: absolute;
+  left: 2rem;
+  bottom: 0;
+}
+.girlDiv{
+  position: absolute;
+  right: 2rem;
+  bottom: 0;
+}
+#boy,
+#girl{
+  width: 200px;
+  height: 700px
+}
+.instruction{
+  position: absolute;
+  top: 7rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  height: 35vh;
+  /* background-color: lightblue; */
+}
+#algebraHeading{
+  text-align: center;
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+}
+#askHelp{
+  text-align: center;
+  color: white;
+  font-size: 1.8rem;
+}
+.startButton{
+  height: 4.5rem;
+  /* width: 15.5rem; */
+  background-color: var(--greenButton);
+  color: white;
+  font-size: 2.5rem;
+  font-weight: bold;
+  padding: 0.5rem 2rem;
+  position: absolute;
+  bottom: 6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 3px solid black;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0px 4px 8px 5px #0000007a;
+  transition: background-color 0.3s ease;
+}
+.startButton:hover{
+  background-color: var(--greenButtonActive);
+}
+.startButton:active{
+  background-color: var(--greenButtonActive);
+  transform: scale(0.91) translateX(-50%);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* GamePlay */
+.GameplayCont{
+  background: url('./Assets/img/gamePlayBack.png') no-repeat center center/cover;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+.girlDivPlay{
+  position: absolute;
+  right: 5rem;
+  bottom: 0;
+}
+.boyDivPlay{
+  position: absolute;
+  left: 5rem;
+  bottom: 0;
+}
+.eqCont{
+  position: absolute;
+  top: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.equation,
+.soln{
+  font-size: 3.5rem;
+  font-weight: bold;
+  color: white;
+  margin: 0;
+  padding: 1rem;
+}
+
+
+
+/* TableSetup */
+.ballCont{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 56%;
+}
+.unknownSide{
+  /* border: 2px solid red; */
+  width: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  transform: rotate(180deg);
+  align-self: flex-end;
+  position: relative;
+}
+.unknownBalls{
+  width: 100%;
+  display: flex;
+  align-items: baseline;
+  transition: opacity 0.5s ease;
+}
+.unknownRed{
+  display: flex;
+  flex-wrap: wrap;
+}
+.knownSide{
+  /* border: 2px solid green; */
+  width: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  transform: rotate(180deg);
+  align-self: flex-end;
+}
+.redBall{
+  background-color: red;
+  width: 1.3rem;
+  height: 1.3rem;
+  border: 3px solid black;
+  border-radius: 50%;
+  align-self: flex-end;
+}
+.ballsCont{
+  display: flex;
+  flex-wrap: wrap;
+  position: absolute;
+  /* opacity: 0;
+  position: none; */
+}
+.smallBlueBall{
+  background-color: var(--blue);
+  width: 1.3rem;
+  height: 1.3rem;
+  border: 3px solid black;
+  border-radius: 50%;
+  align-self: flex-end;
+}
+.blueBall{
+  background-color: rgb(0, 110, 212);
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 3px solid black;
+  border-radius: 50%;
+}
+.tableSetupCont{
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 72%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  animation: tableAnim 1s ease 0s;
+}
+@keyframes tableAnim {
+  from{
+    left: 150%;
+  }
+  to{
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+.tableCover{
+  width: 100%;
+  height: 5vh;
+  background-color: black;
+}
+.table{
+  width: 90%;
+  height: 35vh;
+  background-color: #464646;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.inTableQues{
+  font-size: 1.8rem;
   color: white;
+  font-weight: bold;
+  padding: 0rem 1rem;
+}
+.options{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%
+}
+.optionBtn{
+  background-color: var(--blue);
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0px 4px 8px 5px #0000007a;
+  transition: background-color 0.3s ease;
+  padding: 0.3rem 2rem;
+}
+.optionBtn:hover{
+  background-color: var(--darkBlue);
+}
+.optionBtn:active{
+  transform: scale(0.91);
+}
+#beam{
+  width: 60%
 }
 
-.App-link {
-  color: #61dafb;
+/* right answer */
+.rightAnsCont{
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(67, 65, 57, 0.63);
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.5s ease;
+}
+.hurray,
+.verification{
+  font-size: 4rem;
+  color: var(--yellow);
+  font-weight: bolder;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.verification p{
+  margin: 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#nextBtn{
+  bottom: 5rem;
+  right: 5rem;
 }
+
+
+/* Wrong Ans */
+
+.wrongAnsCont{
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(67, 65, 57, 0.63);
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.5s ease;
+}
+.tryAgain,
+.verification{
+  font-size: 4rem;
+  color: var(--yellow);
+  font-weight: bolder;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.verification p{
+  margin: 0;
+}
+
+#prevBtn{
+  bottom: 5rem;
+  left: 5rem;
+}
+
+

@@ -1,24 +1,37 @@
-import logo from './logo.svg';
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 
-function App() {
+// importing compoonents
+import Start from './Components/Start';
+import Gameplay from './Components/Gameplay';
+import Welcome from './Components/Welcome';
+
+import BackgroundAudio from './Assets/audio/background.mp3';
+
+const App = () => {
+
+  const playAudioFromWelcome = () => {
+    const music = new Audio(BackgroundAudio);
+    music.play();
+    music.addEventListener("ended", ()=>{
+      music.currentTime=0;
+      music.play();
+    });
+    console.log('Play Audio called');
+
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route path="/" exact render={() => <Welcome playAudio={playAudioFromWelcome} />} />
+          <Route path="/Start" exact component={Start} />
+          <Route path="/play" exact component={Gameplay} />
+        </Switch>
+
+      </div>
+    </Router>
   );
 }
 
